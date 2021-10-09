@@ -1,0 +1,41 @@
+module Base
+{
+	imports
+	{
+		Base,
+	}
+
+	item EmptyPetrolCan
+    {
+        Weight	            = 0.3,
+        CanStoreWater	    = TRUE,
+        Type	            = Normal,
+        DisplayName 	    = Empty Gas Can,
+        Icon	            = Petrol,
+        StaticModel         = GasCan,
+        SurvivalGear        = TRUE,
+        ReplaceOnUseOn	    = WaterSource-PetrolCanWater,
+        ReplaceInSecondHand = Bag_GasCan_LHand holdingbagleft,
+        ReplaceInPrimaryHand = Bag_GasCan_RHand holdingbagright,
+    }
+
+    item PetrolCanWater
+    {
+        Weight	            = 5,
+        CanStoreWater	    = TRUE,
+        IsWaterSource       = TRUE,
+        CanStoreWater       = TRUE,
+        UseDelta	        = 0.125,
+        Type	            = Drainable,
+        DisplayName 	    = Gas Can with Water,
+        Icon	            = Petrol,
+        StaticModel         = GasCan,
+        SurvivalGear        = TRUE,
+        IsCookable          = FALSE,
+        ReplaceOnDeplete	= EmptyPetrolCan,
+        ReplaceOnUseOn		= WaterSource-PetrolCanWater,
+        ReplaceInSecondHand = Bag_GasCan_LHand holdingbagleft,
+        ReplaceInPrimaryHand = Bag_GasCan_RHand holdingbagright,
+    }
+	
+}

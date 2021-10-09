@@ -1,0 +1,18 @@
+module CocoLiquidOverhaulModels {
+
+    model BigWaterBottle
+    {
+        mesh = BigWaterBottle,
+    }
+
+    model BigWaterBottleFuel
+    {
+        mesh = BigWaterBottleFuel,
+    }
+
+    model BigWaterBottleEmpty
+    {
+        mesh = BigWaterBottleEmpty,
+    }
+
+}
