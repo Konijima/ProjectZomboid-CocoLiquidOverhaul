@@ -1,0 +1,14 @@
+ContextMenu_PTBR = {
+	ContextMenu_WaterName = "Água",
+	ContextMenu_FuelName = "Combustível",
+	ContextMenu_PlaceBottle = "Colocar Garrafa",
+	ContextMenu_TakeBottle = "Tirar Garrafa",
+	ContextMenu_NoBottle = "Sem Garrafa",
+	ContextMenu_EmptyBottle = "Garrafa Vazia",
+	ContextMenu_EmptyDispenser = "Dispensor Vazio",
+	ContextMenu_EmptyBottleDispenser = "Bebedouro Vazio",
+	ContextMenu_WaterDispenser = "Bebedouro",
+	ContextMenu_FuelDispenser = "Bomba de Gasolina",
+	ContextMenu_IsEmpty = "Vazio",
+	ContextMenu_FuelSource = "Fuel source",
+}

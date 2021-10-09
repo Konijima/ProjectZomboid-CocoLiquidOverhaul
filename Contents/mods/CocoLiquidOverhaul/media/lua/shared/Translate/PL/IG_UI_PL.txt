@@ -1,0 +1,3 @@
+IGUI_PL = {
+	IGUI_ItemCat_Coco_Liquid_Container = "Kontener z cieczą",
+}

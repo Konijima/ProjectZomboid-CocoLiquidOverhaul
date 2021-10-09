@@ -1,0 +1,11 @@
+ItemName_PTBR = {
+    ItemName_Base.PetrolCanWater = "Galão de Combustível com Água",
+
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonEmpty = "Galão de Água Vazio",
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonFull = "Galão de Água",
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonPetrol = "Galão de Água com Combustivel",
+
+    ItemName_CocoLiquidOverhaulItems.Coco_LargeEmptyPetrolCan = "Empty Large Gas Can",
+    ItemName_CocoLiquidOverhaulItems.Coco_LargePetrolCan = "Large Gas Can",
+    ItemName_CocoLiquidOverhaulItems.Coco_LargePetrolCanWater = "Large Gas Can with Water",
+}

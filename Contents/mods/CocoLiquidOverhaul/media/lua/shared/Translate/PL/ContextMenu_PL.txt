@@ -1,0 +1,14 @@
+ContextMenu_PL = {
+	ContextMenu_WaterName = "Woda",
+	ContextMenu_FuelName = "Paliwo",
+	ContextMenu_PlaceBottle = "Położ butle",
+	ContextMenu_TakeBottle = "Weź butle",
+	ContextMenu_NoBottle = "Bez butelki",
+	ContextMenu_EmptyBottle = "Wypróżnij butelke",
+	ContextMenu_EmptyDispenser = "Dystrybutor",
+	ContextMenu_EmptyBottleDispenser = "Pusty dystrybutor",
+	ContextMenu_WaterDispenser = "Dystrybutor wody",
+	ContextMenu_FuelDispenser = "Dystrybutor paliwa",
+	ContextMenu_IsEmpty = "Pusty",
+	ContextMenu_FuelSource = "Fuel source",
+}

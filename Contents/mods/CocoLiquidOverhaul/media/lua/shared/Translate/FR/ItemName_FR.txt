@@ -1,0 +1,11 @@
+ItemName_FR = {
+    ItemName_Base.PetrolCanWater = "Jerrican d'eau",
+
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonEmpty = "Grande bouteille vide",
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonFull = "Grande bouteille d'eau",
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonPetrol = "Grande bouteille d'essence",
+
+    ItemName_CocoLiquidOverhaulItems.Coco_LargeEmptyPetrolCan = "Grande jerrican vide",
+    ItemName_CocoLiquidOverhaulItems.Coco_LargePetrolCan = "Grande jerrican",
+    ItemName_CocoLiquidOverhaulItems.Coco_LargePetrolCanWater = "Grande jerrican d'eau",
+}

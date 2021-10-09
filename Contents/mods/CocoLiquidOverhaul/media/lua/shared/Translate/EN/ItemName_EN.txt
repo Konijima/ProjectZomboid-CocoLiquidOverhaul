@@ -1,0 +1,13 @@
+ItemName_EN = {
+    ItemName_Base.PetrolCanWater = "Gas Can with Water",
+
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonEmpty = "Empty Water Jug",
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonFull = "Water Jug",
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterGallonPetrol = "Water Jug with Fuel",
+
+    ItemName_CocoLiquidOverhaulItems.Coco_LargeEmptyPetrolCan = "Empty Large Gas Can",
+    ItemName_CocoLiquidOverhaulItems.Coco_LargePetrolCan = "Large Gas Can",
+    ItemName_CocoLiquidOverhaulItems.Coco_LargePetrolCanWater = "Large Gas Can with Water",
+
+    ItemName_CocoLiquidOverhaulItems.Coco_WaterTank = "Water Tank",
+}

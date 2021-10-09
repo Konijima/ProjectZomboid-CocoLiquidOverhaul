@@ -1,0 +1,14 @@
+ContextMenu_ES = {
+	ContextMenu_WaterName = "Agua",
+	ContextMenu_FuelName = "Gasolina",
+	ContextMenu_PlaceBottle = "Colocar botella",
+	ContextMenu_TakeBottle = "Coger botella",
+	ContextMenu_NoBottle = "Sin botella",
+	ContextMenu_EmptyBottle = "Botella vacía",
+	ContextMenu_EmptyDispenser = "Dispensador",
+	ContextMenu_EmptyBottleDispenser = "Dispensador vacío",
+	ContextMenu_WaterDispenser = "Dispensador de agua",
+	ContextMenu_FuelDispenser = "Dispensador de gasolina",
+	ContextMenu_IsEmpty = "Vacío",
+	ContextMenu_FuelSource = "Fuel source",
+}
