@@ -13,7 +13,6 @@ module CocoLiquidOverhaulItems
 		DisplayName			    = Empty Water Jug,
 		ReplaceOnUseOn	        = WaterSource-Coco_WaterGallonFull,
 		Icon			        = Coco_WaterGallonEmpty,
-		Tooltip                 = Tooltip_item_RainFromGround,
 		StaticModel 		    = BigWaterBottleEmpty,
 		ReplaceInSecondHand     = Bag_BigWaterBottleEmpty_LHand holdingbagleft,
         ReplaceInPrimaryHand    = Bag_BigWaterBottleEmpty_RHand holdingbagright,
@@ -32,7 +31,6 @@ module CocoLiquidOverhaulItems
 		ReplaceOnUseOn		    = WaterSource-Coco_WaterGallonFull,
 		Icon                    = Coco_WaterGallonFull,
 		IsCookable              = FALSE,
-		Tooltip                 = Tooltip_item_RainFromGround,
 		StaticModel 		    = BigWaterBottle,
 		ReplaceInSecondHand     = Bag_BigWaterBottle_LHand holdingbagleft,
         ReplaceInPrimaryHand    = Bag_BigWaterBottle_RHand holdingbagright,
@@ -99,6 +97,4 @@ module CocoLiquidOverhaulItems
         ReplaceInSecondHand     = Bag_LargePetrolCan_LHand holdingbagleft,
         ReplaceInPrimaryHand    = Bag_LargePetrolCan_RHand holdingbagright,
     }
-
 }
-
