@@ -4,6 +4,7 @@ require "TimedActions/ISBaseTimedAction"
 
 local ISTakeWaterActionFromDispenser = ISBaseTimedAction:derive("ISTakeWaterActionFromDispenser")
 
+---isValid
 function ISTakeWaterActionFromDispenser:isValid()
     if self.oldItem ~= nil then
         if self.oldItem and not self.oldItem:getContainer() then return false end
@@ -13,6 +14,7 @@ function ISTakeWaterActionFromDispenser:isValid()
     return CLO_Object.GetObjectWaterAmount(self.waterObject) > 0
 end
 
+---waitToStart
 function ISTakeWaterActionFromDispenser:waitToStart()
     if self.waterObject then
         self.character:faceThisObject(self.waterObject)
@@ -20,6 +22,7 @@ function ISTakeWaterActionFromDispenser:waitToStart()
     return self.character:shouldBeTurning()
 end
 
+---update
 function ISTakeWaterActionFromDispenser:update()
     if self.item ~= nil then
         self.item:setJobDelta(self:getJobDelta())
@@ -30,6 +33,7 @@ function ISTakeWaterActionFromDispenser:update()
     end
 end
 
+---start
 function ISTakeWaterActionFromDispenser:start()
     local waterAvailable = CLO_Object.GetObjectWaterAmount(self.waterObject)
 
@@ -79,7 +83,17 @@ function ISTakeWaterActionFromDispenser:start()
     end
 end
 
+---stopSound
+function ISTakeWaterActionFromDispenser:stopSound()
+    if self.sound and self.character:getEmitter():isPlaying(self.sound) then
+		self.character:stopOrTriggerSound(self.sound);
+	end
+end
+
+---stop
 function ISTakeWaterActionFromDispenser:stop()
+    self:stopSound()
+
     local used = self:getJobDelta() * self.waterUnit
     if used >= 1 then
         local waterAmount = CLO_Object.GetObjectWaterAmount(self.waterObject) - used
@@ -93,12 +107,6 @@ function ISTakeWaterActionFromDispenser:stop()
         --sendClientCommand(self.character, 'object', 'takeWater', args)
     end
 
-    if self.sound then
-        self.character:getEmitter():stopSound(self.sound)
-        self.sound = nil
-    end
-
-    ISBaseTimedAction.stop(self)
     if self.item ~= nil then
         self.item:setBeingFilled(false)
         self.item:setJobDelta(0.0)
@@ -106,9 +114,13 @@ function ISTakeWaterActionFromDispenser:stop()
             self.item:setTaintedWater(true)
         end
     end
+
+    ISBaseTimedAction.stop(self)
 end
 
+---perform
 function ISTakeWaterActionFromDispenser:perform()
+    self:stopSound()
 
     if self.item ~= nil then
         self.item:setBeingFilled(false)
@@ -136,11 +148,6 @@ function ISTakeWaterActionFromDispenser:perform()
         CLO_Dispenser.TransformDispenserOnSquare(self.square, CLO_DispenserTypes.EmptyBottleDispenser, 0, false)
     else
         CLO_Object.SetObjectWaterAmount(self.waterObject, waterAmount)
-    end
-
-    if self.sound then
-        self.character:getEmitter():stopSound(self.sound)
-        self.sound = nil
     end
 
     --local obj = self.waterObject

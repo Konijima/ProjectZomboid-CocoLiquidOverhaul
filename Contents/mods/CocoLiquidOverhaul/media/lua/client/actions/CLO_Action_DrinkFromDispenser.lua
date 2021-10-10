@@ -27,17 +27,31 @@ function ISDrinkFromDispenser:start()
     self.action:setTime(self.waterUnit * 30)
 end
 
+---stopSound
+function ISDrinkFromDispenser:stopSound()
+    if self.sound and self.character:getEmitter():isPlaying(self.sound) then
+		self.character:stopOrTriggerSound(self.sound);
+	end
+end
+
 ---stop
 function ISDrinkFromDispenser:stop()
-    ISBaseTimedAction.stop(self)
-
-    if self.sound then
-		self.character:getEmitter():stopSound(self.sound)
-		self.sound = nil
-	end
-
+    self:stopSound()
+    
     local percentage = self.action:getJobDelta()
     self:drink(percentage)
+
+    ISBaseTimedAction.stop(self)
+end
+
+---perform
+function ISDrinkFromDispenser:perform()
+    self:stopSound()
+    
+    local percentage = self.action:getJobDelta()
+    self:drink(percentage)
+
+    ISBaseTimedAction.perform(self)
 end
 
 ---update
@@ -45,19 +59,7 @@ function ISDrinkFromDispenser:update()
 
 end
 
----perform
-function ISDrinkFromDispenser:perform()
-    ISBaseTimedAction.perform(self)
-
-    if self.sound then
-		self.character:getEmitter():stopSound(self.sound)
-		self.sound = nil
-	end
-
-    local percentage = self.action:getJobDelta()
-    self:drink(percentage)
-end
-
+---drink
 function ISDrinkFromDispenser:drink(percentage)
     -- calcul the percentage drank
     if percentage > 0.95 then
