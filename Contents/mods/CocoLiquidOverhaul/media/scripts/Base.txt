@@ -38,5 +38,4 @@ module Base
         ReplaceInSecondHand     = Bag_GasCan_LHand holdingbagleft,
         ReplaceInPrimaryHand    = Bag_GasCan_RHand holdingbagright,
     }
-	
 }

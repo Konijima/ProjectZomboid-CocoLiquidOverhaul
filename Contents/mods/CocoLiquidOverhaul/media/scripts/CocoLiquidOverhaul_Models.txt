@@ -1,4 +1,9 @@
-module CocoLiquidOverhaulModels {
+module CocoLiquidOverhaulModels
+{
+    imports
+	{
+		Base,
+	}
 
     model BigWaterBottle
     {
@@ -15,4 +20,8 @@ module CocoLiquidOverhaulModels {
         mesh = BigWaterBottleEmpty,
     }
 
+    model LargePetrolCan
+    {
+        mesh = LargePetrolCan,
+    }
 }
