@@ -7,8 +7,6 @@ A mod presented by the Coco Labs community focusing on increasing the possibilit
   
 ## Features:
 - 3D Models.  
-- Large Gas Can.  
-- Generator Add Fuel submenu.  
 - Add/Siphon gasoline to/from vehicle with any fuel containers.  
 - Multiple translation now available.  
 - Pour fuel on the ground.  
@@ -33,13 +31,6 @@ A mod presented by the Coco Labs community focusing on increasing the possibilit
 ![Water Dispenser](https://github.com/cocolabs/pz-liquid-overhaul/blob/master/resources/BigWaterBottle/Dispenser/New3D/location_business_office_generic_01_48_water.png?raw=true)
 ![Fuel Dispenser](https://github.com/cocolabs/pz-liquid-overhaul/blob/master/resources/BigWaterBottle/Dispenser/New3D/location_business_office_generic_01_48_fuel.png?raw=true)
   
-## Planned:
-- To add a submenu for gas pump "Take Fuel" context option with available fuel containers.
-- To add a Water Tank IsoObject to store huge amount of water or fuel.  
-- To re-balance all liquid container capacity and weights.  
-- To make initial water amount random in water dispensers.  
-- To rework fake liquid items such as Milk and Alcohol.  
-  
 ## Known Bugs:
 - Dispenser context menu is difficult to open using Controller.
 - Vanilla dispenser appearance change after the first click only.  
@@ -51,9 +42,6 @@ A mod presented by the Coco Labs community focusing on increasing the possibilit
 - Polish
 - Brazilian Portuguese
 - Spanish
-  
-## Planned Languages
-- Russian
   
 ## Compatibility  
 This mod overrides the following features/functions:  
