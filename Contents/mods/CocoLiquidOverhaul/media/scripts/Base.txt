@@ -7,12 +7,13 @@ module Base
 
 	item EmptyPetrolCan
     {
-        Weight	                = 0.3,
+        Weight	                = 1.6,
         CanStoreWater	        = TRUE,
         Type	                = Normal,
         DisplayName 	        = Empty Gas Can,
         Icon	                = Petrol,
         StaticModel             = GasCan,
+        WorldStaticModel        = GasCan_Ground,
         SurvivalGear            = TRUE,
         ReplaceOnUseOn	        = WaterSource-PetrolCanWater,
         ReplaceInSecondHand     = Bag_GasCan_LHand holdingbagleft,
@@ -31,6 +32,7 @@ module Base
         DisplayName 	        = Gas Can with Water,
         Icon	                = Petrol,
         StaticModel             = GasCan,
+        WorldStaticModel        = GasCan_Ground,
         SurvivalGear            = TRUE,
         IsCookable              = FALSE,
         ReplaceOnDeplete	    = EmptyPetrolCan,
