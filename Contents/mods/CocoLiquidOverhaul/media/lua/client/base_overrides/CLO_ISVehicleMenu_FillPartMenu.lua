@@ -47,9 +47,11 @@ function CLO_Override_ISVehicleMenu_FillPartMenu()
                             slice:addSlice(getText("ContextMenu_VehicleAddGas"), getTexture("Item_Petrol"), ISVehiclePartMenu.onAddGasoline, playerObj, part)
                         end
                     else
-                        local option = context:getOptionFromName(getText("ContextMenu_VehicleAddGas"))
-                        if option then context:removeOption(option) end
-                        context:addOption(getText("ContextMenu_VehicleAddGas"), playerObj,ISVehiclePartMenu.onAddGasoline, part)
+                        if not ISVehiclePartMenu.getGasCanNotEmpty(playerObj, typeToItem) then
+                            context:addOption(getText("ContextMenu_VehicleAddGas"), playerObj, ISVehiclePartMenu.onAddGasoline, part)
+                        end
+                        --local option = context:getOptionFromName(getText("ContextMenu_VehicleAddGas"))
+                        --if option ~= nil then context:removeOption(option) end
                     end
                 end
                 if ISVehiclePartMenu.getCustomGasCanNotFull(playerObj, typeToItem) and part:getContainerContentAmount() > 0 then
@@ -58,9 +60,11 @@ function CLO_Override_ISVehicleMenu_FillPartMenu()
                             slice:addSlice(getText("ContextMenu_VehicleSiphonGas"), getTexture("Item_Petrol"), ISVehiclePartMenu.onTakeGasoline, playerObj, part)
                         end
                     else
-                        local option = context:getOptionFromName(getText("ContextMenu_VehicleSiphonGas"))
-                        if option then context:removeOption(option) end
-                        context:addOption(getText("ContextMenu_VehicleSiphonGas"), playerObj, ISVehiclePartMenu.onTakeGasoline, part)
+                        if not ISVehiclePartMenu.getGasCanNotFull(playerObj, typeToItem) then
+                            context:addOption(getText("ContextMenu_VehicleSiphonGas"), playerObj, ISVehiclePartMenu.onTakeGasoline, part)
+                        end
+                        --local option = context:getOptionFromName(getText("ContextMenu_VehicleSiphonGas"))
+                        --if option ~= nil then context:removeOption(option) end
                     end
                 end
             end
