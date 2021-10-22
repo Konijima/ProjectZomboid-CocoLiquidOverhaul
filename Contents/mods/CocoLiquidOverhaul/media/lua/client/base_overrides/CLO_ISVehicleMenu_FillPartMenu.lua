@@ -40,7 +40,7 @@ function CLO_Override_ISVehicleMenu_FillPartMenu()
         local typeToItem = VehicleUtils.getItems(playerIndex)
         for i=1,vehicle:getPartCount() do
             local part = vehicle:getPartByIndex(i-1)
-            if not vehicle:isEngineStarted() and part:isContainer() and part:getContainerContentType() == "Gasoline" then
+            if not vehicle:isEngineStarted() and part:isContainer() and (part:getContainerContentType() == "Gasoline" or part:getContainerContentType() == "Gasoline Storage") then
                 if ISVehiclePartMenu.getCustomGasCanNotEmpty(playerObj, typeToItem) and part:getContainerContentAmount() < part:getContainerCapacity() then
                     if slice then
                         if not ISVehiclePartMenu.getGasCanNotEmpty(playerObj, typeToItem) then
