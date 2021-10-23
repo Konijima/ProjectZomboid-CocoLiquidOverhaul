@@ -22,15 +22,23 @@ function ISTakeFuelFromDispenser:start()
 
 	-- let's transform an empty can into an empty petrol can
 	local itemType = self.petrolCan:getType()
-	if itemType == "EmptyPetrolCan" or itemType == "Coco_WaterGallonEmpty" or itemType == "Coco_LargeEmptyPetrolCan" then
+
+	local customItem = nil
+	for i = 1, #CLO_ModSettings.CustomFuelItems do
+        local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+        if itemType == fuelItem.empty or itemType == fuelItem.full then
+            customItem = fuelItem
+            break
+        end
+    end
+
+	if itemType == "EmptyPetrolCan" or customItem ~= nil then
 		local isPrimary = self.petrolCan == self.character:getPrimaryHandItem()
 		local emptyCan = self.petrolCan
 		if itemType == "EmptyPetrolCan" then
 			self.petrolCan = self.character:getInventory():AddItem("Base.PetrolCan")
-		elseif itemType == "Coco_WaterGallonEmpty" then
-			self.petrolCan = self.character:getInventory():AddItem("CocoLiquidOverhaulItems.Coco_WaterGallonPetrol")
-		elseif itemType == "Coco_LargeEmptyPetrolCan" then
-			self.petrolCan = self.character:getInventory():AddItem("CocoLiquidOverhaulItems.Coco_LargePetrolCan")
+		else
+			self.petrolCan = self.character:getInventory():AddItem(customItem.module .. "." .. customItem.full)
 		end
 		self.petrolCan:setUsedDelta(0)
 

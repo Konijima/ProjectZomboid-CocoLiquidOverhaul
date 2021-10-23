@@ -447,7 +447,7 @@ local function menu_drink(_playerNum, _dispenserObject, _context)
     end
 end
 
----menu_place_bottle
+---menu_fill_fuel
 ---@param _playerNum number
 ---@param _dispenserObject IsoObject
 ---@param _context ISContextMenu
@@ -456,14 +456,15 @@ local function menu_fill_fuel(_playerNum, _dispenserObject, _context)
     local playerInv = playerObj:getInventory()
 
     local fillableBottles = CLO_Inventory.GetAllNotFullDrainableItemOfTypeInInventory(playerInv, "EmptyPetrolCan", "PetrolCan")
-    local fillableBottles2 = CLO_Inventory.GetAllNotFullDrainableItemOfTypeInInventory(playerInv, "Coco_WaterGallonEmpty", "Coco_WaterGallonPetrol")
-    local fillableBottles3 = CLO_Inventory.GetAllNotFullDrainableItemOfTypeInInventory(playerInv, "Coco_LargeEmptyPetrolCan", "Coco_LargePetrolCan")
-    for _,v in ipairs(fillableBottles2) do
-        table.insert(fillableBottles, v)
+    
+    for i = 1, #CLO_ModSettings.CustomFuelItems do
+        local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+        local fillableBottles2 = CLO_Inventory.GetAllNotFullDrainableItemOfTypeInInventory(playerInv, fuelItem.empty, fuelItem.full)
+        for _,v in ipairs(fillableBottles2) do
+            table.insert(fillableBottles, v)
+        end
     end
-    for _,v in ipairs(fillableBottles3) do
-        table.insert(fillableBottles, v)
-    end
+
     if #fillableBottles > 0 then
         local fillSubMenu = CLO_Context.CreateSubMenu(_context, getText("ContextMenu_Fill"))
         for i = 1, #fillableBottles do
