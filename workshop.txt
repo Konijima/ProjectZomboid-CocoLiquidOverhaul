@@ -67,8 +67,8 @@ description=[hr]
 description=
 description=[h1]Compatibility[/h1]
 description=This mod is compatible with these mods:
-description=- Autotsar Trailer
-description=- Container!
+description=- Autotsar Trailers (https://steamcommunity.com/sharedfiles/filedetails/?id=2282429356)
+description=- Containers! (https://steamcommunity.com/sharedfiles/filedetails/?id=2625625421)
 description=
 description=[hr]
 description=
