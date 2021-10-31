@@ -1,7 +1,0 @@
-module CocoLiquidOverhaulRecipes
-{
-	imports
-	{
-		Base,
-	}
-}

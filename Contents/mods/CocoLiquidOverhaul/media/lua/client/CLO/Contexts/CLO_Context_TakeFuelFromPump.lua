@@ -43,6 +43,7 @@ local function Context_TakeFuelFromPump(_playerNum, _context, _, test)
 
         local availableFuel = CLO_World.GetAvailableFuelOnSquare(square)
         if availableFuel > 0 and ((SandboxVars.AllowExteriorGenerator and square:haveElectricity()) or (SandboxVars.ElecShutModifier > -1 and GameTime:getInstance():getNightsSurvived() < SandboxVars.ElecShutModifier)) then
+
             local petrolCans = CLO_Inventory.GetAllNotFullDrainableItemOfTypeInInventory(inventory, "EmptyPetrolCan", "PetrolCan")
             for i = 1, #CLO_ModSettings.CustomFuelItems do
                 local fuelItem = CLO_ModSettings.CustomFuelItems[i]

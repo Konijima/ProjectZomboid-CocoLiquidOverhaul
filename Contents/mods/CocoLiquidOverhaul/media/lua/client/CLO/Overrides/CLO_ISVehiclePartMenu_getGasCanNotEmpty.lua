@@ -1,7 +1,9 @@
-function CLO_Override_ISVehiclePartMenu_getGasCanNotEmpty()
-    CLO_Print("Overriding: 'ISVehiclePartMenu.getGasCanNotEmpty'")
+CLO_Print("Overriding: 'ISVehiclePartMenu.getGasCanNotEmpty'")
 
-    function ISVehiclePartMenu.getCustomGasCanNotEmpty(playerObj, typeToItem)
+local ISVehiclePartMenu_getGasCanNotEmpty = ISVehiclePartMenu.getGasCanNotEmpty
+function ISVehiclePartMenu.getGasCanNotEmpty(playerObj, typeToItem)
+    local gasCan = ISVehiclePartMenu_getGasCanNotEmpty(playerObj, typeToItem)
+    if not gasCan then
         local customFuelItem = nil
         for i = 1, #CLO_ModSettings.CustomFuelItems do
             local fuelItem = CLO_ModSettings.CustomFuelItems[i]
@@ -28,20 +30,10 @@ function CLO_Override_ISVehiclePartMenu_getGasCanNotEmpty()
                     end
                 end
             end
-            if gasCan then return gasCan end
+            return gasCan
         end
         return nil
+    else
+        return gasCan
     end
-
-    ---store vanilla function
-    --local ISVehiclePartMenu_getGasCanNotEmpty = ISVehiclePartMenu.getGasCanNotEmpty
-    --
-    --function ISVehiclePartMenu.getGasCanNotEmpty(playerObj, typeToItem)
-    --    local result = ISVehiclePartMenu_getGasCanNotEmpty(playerObj, typeToItem) -- run vanilla function first
-    --    if result == nil then
-    --        return ISVehiclePartMenu.getCustomGasCanNotEmpty(playerObj, typeToItem)
-    --    else
-    --        return result
-    --    end
-    --end
 end

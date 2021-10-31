@@ -11,4 +11,5 @@ ContextMenu_PL = {
 	ContextMenu_FuelDispenser = "Dystrybutor paliwa",
 	ContextMenu_IsEmpty = "Pusty",
 	ContextMenu_FuelSource = "Fuel source",
+	ContextMenu_GeneratorAddFuelFrom = "Dodaj paliwo z",
 }

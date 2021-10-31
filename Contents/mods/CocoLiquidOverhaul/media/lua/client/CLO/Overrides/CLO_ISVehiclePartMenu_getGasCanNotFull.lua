@@ -1,7 +1,9 @@
-function CLO_Override_ISVehiclePartMenu_getGasCanNotFull()
-    CLO_Print("Overriding: 'ISVehiclePartMenu.getGasCanNotFull'")
+CLO_Print("Overriding: 'ISVehiclePartMenu.getGasCanNotFull'")
 
-    function ISVehiclePartMenu.getCustomGasCanNotFull(playerObj, typeToItem)
+local ISVehiclePartMenu_getGasCanNotFull = ISVehiclePartMenu.getGasCanNotFull
+function ISVehiclePartMenu.getGasCanNotFull(playerObj, typeToItem)
+    local gasCan = ISVehiclePartMenu_getGasCanNotFull(playerObj, typeToItem)
+    if not gasCan then
         local allCustomEmpty = {}
         local allCustomFull = {}
         for i = 1, #CLO_ModSettings.CustomFuelItems do
@@ -53,7 +55,7 @@ function CLO_Override_ISVehiclePartMenu_getGasCanNotFull()
                     usedDelta = gasCan:getUsedDelta()
                 end
             end
-            if gasCan then return gasCan end
+            return gasCan
         end
 
         ---Return first custom found
@@ -62,17 +64,7 @@ function CLO_Override_ISVehiclePartMenu_getGasCanNotFull()
         end
 
         return nil
+    else
+        return gasCan
     end
-
-    ---store vanilla function
-    --local ISVehiclePartMenu_getGasCanNotFull = ISVehiclePartMenu.getGasCanNotFull
-    --
-    --function ISVehiclePartMenu.getGasCanNotFull(playerObj, typeToItem)
-    --    local result = ISVehiclePartMenu_getGasCanNotFull(playerObj, typeToItem) -- run vanilla function first
-    --    if result == nil then
-    --        return ISVehiclePartMenu.getCustomGasCanNotFull(playerObj, typeToItem)
-    --    else
-    --        return result
-    --    end
-    --end
 end

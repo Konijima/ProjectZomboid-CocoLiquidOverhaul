@@ -6,7 +6,7 @@ CLO_Contexts = CLO_Contexts or {}
 ---@param _items table
 local function Context_InventoryDebug(_playerNum, _context, _items)
 
-    if not CLO_ModSettings.Config.Debug then return end
+    if not getCore():getDebug() then return end
 
     ---@type IsoPlayer
     local playerObject = getSpecificPlayer(_playerNum)

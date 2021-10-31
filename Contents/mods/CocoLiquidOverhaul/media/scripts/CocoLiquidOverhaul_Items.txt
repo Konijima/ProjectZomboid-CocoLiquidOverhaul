@@ -1,100 +1,106 @@
 module CocoLiquidOverhaulItems
 {
-	imports
-	{
-		Base,
-	}
-	
-	item Coco_WaterGallonEmpty
-	{
-		Weight                  = 1,
-		CanStoreWater		    = TRUE,
-		Type			        = Normal,
-		DisplayName			    = Empty Water Jug,
-		ReplaceOnUseOn	        = WaterSource-Coco_WaterGallonFull,
-		Icon			        = Coco_WaterGallonEmpty,
-		StaticModel 		    = BigWaterBottleEmpty,
-		ReplaceInSecondHand     = Bag_BigWaterBottleEmpty_LHand holdingbagleft,
-        ReplaceInPrimaryHand    = Bag_BigWaterBottleEmpty_RHand holdingbagright,
-	}
-	
-	item Coco_WaterGallonFull
-	{
-		Weight                  = 30,
-		IsWaterSource           = TRUE,
-		CanStoreWater           = TRUE,
-		Type                    = Drainable,
-		UseWhileEquipped	    = FALSE,
-		UseDelta                = 0.01,
-		DisplayName             = Water Jug,
-		ReplaceOnDeplete	    = Coco_WaterGallonEmpty,
-		ReplaceOnUseOn		    = WaterSource-Coco_WaterGallonFull,
-		Icon                    = Coco_WaterGallonFull,
-		IsCookable              = FALSE,
-		StaticModel 		    = BigWaterBottle,
-		ReplaceInSecondHand     = Bag_BigWaterBottle_LHand holdingbagleft,
-        ReplaceInPrimaryHand    = Bag_BigWaterBottle_RHand holdingbagright,
-	}
-	
-	item Coco_WaterGallonPetrol
-	{
-		Weight                  = 30,
-		Type                    = Drainable,
-		cantBeConsolided        = TRUE,
-		UseWhileEquipped	    = FALSE,
-		UseDelta                = 0.01,
-		DisplayName             = Water Jug with Fuel,
-		Icon                    = Coco_WaterGallonPetrol,
-		ReplaceOnDeplete	    = Coco_WaterGallonEmpty,
-		StaticModel 		    = BigWaterBottleFuel,
-		ReplaceInSecondHand     = Bag_BigWaterBottleFuel_LHand holdingbagleft,
-        ReplaceInPrimaryHand    = Bag_BigWaterBottleFuel_RHand holdingbagright,
-	}
-
-	item Coco_LargeEmptyPetrolCan
+    imports
     {
-        Weight	                = 1,
-        CanStoreWater	        = TRUE,
-        Type	                = Normal,
-        DisplayName 	        = Empty Large Gas Can,
-        Icon	                = Coco_LargePetrolCan,
+        Base,
+    }
+
+    item Coco_WaterGallonEmpty
+    {
+        Weight                  = 1,
+        CanStoreWater           = TRUE,
+        Type                    = Normal,
+        DisplayName             = Empty Water Jug,
+        ReplaceOnUseOn          = WaterSource-Coco_WaterGallonFull,
+        Icon                    = Coco_WaterGallonEmpty,
+        StaticModel             = BigWaterBottleEmpty,
+        ReplaceInSecondHand     = Bag_BigWaterBottleEmpty_LHand holdingbagleft,
+        ReplaceInPrimaryHand    = Bag_BigWaterBottleEmpty_RHand holdingbagright,
+        Tags                    = LiquidContainer;EmptyLiquidContainer,
+    }
+
+    item Coco_WaterGallonFull
+    {
+        Weight                  = 30,
+        IsWaterSource           = TRUE,
+        CanStoreWater           = TRUE,
+        Type                    = Drainable,
+        UseWhileEquipped        = FALSE,
+        UseDelta                = 0.01,
+        DisplayName             = Water Jug,
+        ReplaceOnDeplete        = Coco_WaterGallonEmpty,
+        ReplaceOnUseOn          = WaterSource-Coco_WaterGallonFull,
+        Icon                    = Coco_WaterGallonFull,
+        IsCookable              = FALSE,
+        StaticModel             = BigWaterBottle,
+        ReplaceInSecondHand     = Bag_BigWaterBottle_LHand holdingbagleft,
+        ReplaceInPrimaryHand    = Bag_BigWaterBottle_RHand holdingbagright,
+        Tags                    = LiquidContainer;WaterLiquidContainer,
+    }
+
+    item Coco_WaterGallonPetrol
+    {
+        Weight                  = 30,
+        Type                    = Drainable,
+        cantBeConsolided        = TRUE,
+        UseWhileEquipped        = FALSE,
+        UseDelta                = 0.01,
+        DisplayName             = Water Jug with Fuel,
+        Icon                    = Coco_WaterGallonPetrol,
+        ReplaceOnDeplete        = Coco_WaterGallonEmpty,
+        StaticModel             = BigWaterBottleFuel,
+        ReplaceInSecondHand     = Bag_BigWaterBottleFuel_LHand holdingbagleft,
+        ReplaceInPrimaryHand    = Bag_BigWaterBottleFuel_RHand holdingbagright,
+        Tags                    = LiquidContainer;PetrolLiquidContainer,
+    }
+
+    item Coco_LargeEmptyPetrolCan
+    {
+        Weight                  = 1,
+        CanStoreWater           = TRUE,
+        Type                    = Normal,
+        DisplayName             = Empty Large Gas Can,
+        Icon                    = Coco_LargePetrolCan,
         StaticModel             = LargePetrolCan,
         SurvivalGear            = TRUE,
-        ReplaceOnUseOn	        = WaterSource-Coco_LargePetrolCanWater,
+        ReplaceOnUseOn          = WaterSource-Coco_LargePetrolCanWater,
         ReplaceInSecondHand     = Bag_LargePetrolCan_LHand holdingbagleft,
         ReplaceInPrimaryHand    = Bag_LargePetrolCan_RHand holdingbagright,
+        Tags                    = LiquidContainer;EmptyLiquidContainer,
     }
 
     item Coco_LargePetrolCan
-	{
-		Weight	                = 13,
-		Type	                = Drainable,
-		UseWhileEquipped	    = FALSE,
-		UseDelta	            = 0.04,
-		DisplayName	            = Large Gas Can,
-		Icon	                = Coco_LargePetrolCan,
-		ReplaceOnDeplete	    = Coco_LargeEmptyPetrolCan,
-		StaticModel             = LargePetrolCan,
-		ReplaceInSecondHand     = Bag_LargePetrolCan_LHand holdingbagleft,
+    {
+        Weight                  = 13,
+        Type                    = Drainable,
+        UseWhileEquipped        = FALSE,
+        UseDelta                = 0.04,
+        DisplayName             = Large Gas Can,
+        Icon                    = Coco_LargePetrolCan,
+        ReplaceOnDeplete        = Coco_LargeEmptyPetrolCan,
+        StaticModel             = LargePetrolCan,
+        ReplaceInSecondHand     = Bag_LargePetrolCan_LHand holdingbagleft,
         ReplaceInPrimaryHand    = Bag_LargePetrolCan_RHand holdingbagright,
-	}
+        Tags                    = LiquidContainer;PetrolLiquidContainer,
+    }
 
     item Coco_LargePetrolCanWater
     {
-        Weight	                = 13,
-        CanStoreWater	        = TRUE,
+        Weight                  = 13,
+        CanStoreWater           = TRUE,
         IsWaterSource           = TRUE,
         CanStoreWater           = TRUE,
-		UseWhileEquipped	    = FALSE,
-        UseDelta	            = 0.04,
-        Type	                = Drainable,
-        DisplayName 	        = Large Gas Can with Water,
-        Icon	                = Coco_LargePetrolCan,
+        UseWhileEquipped        = FALSE,
+        UseDelta                = 0.04,
+        Type                    = Drainable,
+        DisplayName             = Large Gas Can with Water,
+        Icon                    = Coco_LargePetrolCan,
         StaticModel             = LargePetrolCan,
         IsCookable              = FALSE,
-        ReplaceOnDeplete	    = Coco_LargeEmptyPetrolCan,
-        ReplaceOnUseOn		    = WaterSource-Coco_LargePetrolCanWater,
+        ReplaceOnDeplete        = Coco_LargeEmptyPetrolCan,
+        ReplaceOnUseOn          = WaterSource-Coco_LargePetrolCanWater,
         ReplaceInSecondHand     = Bag_LargePetrolCan_LHand holdingbagleft,
         ReplaceInPrimaryHand    = Bag_LargePetrolCan_RHand holdingbagright,
+        Tags                    = LiquidContainer;WaterLiquidContainer,
     }
 }

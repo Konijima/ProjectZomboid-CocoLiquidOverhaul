@@ -6,7 +6,7 @@ CLO_Contexts = CLO_Contexts or {}
 local function Context_Debug(_playerNum, _context, _, test)
     if test then return end
 
-    if not CLO_ModSettings.Config.Debug then return end
+    if not getCore():getDebug() then return end
 
     ---@type IsoPlayer
     local playerObject = getSpecificPlayer(_playerNum)

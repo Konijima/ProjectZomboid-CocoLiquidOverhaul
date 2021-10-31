@@ -1,13 +1,24 @@
+require("CLO/Settings")
+require("CLO/Functions")
+
+require("CLO/Overrides/CLO_ISAddGasolineToVehicle")
+require("CLO/Overrides/CLO_ISTakeGasolineFromVehicle")
+require("CLO/Overrides/CLO_ISVehicleMenu_FillPartMenu")
+require("CLO/Overrides/CLO_ISVehiclePartMenu_getGasCanNotEmpty")
+require("CLO/Overrides/CLO_ISVehiclePartMenu_getGasCanNotFull")
+
+require("CLO/Contexts/CLO_Context_BurnCorpse")
+require("CLO/Contexts/CLO_Context_CheckDrainableContent")
+require("CLO/Contexts/CLO_Context_Debug")
+require("CLO/Contexts/CLO_Context_InteractWithDispenser")
+require("CLO/Contexts/CLO_Context_InteractWithGenerator")
+require("CLO/Contexts/CLO_Context_InventoryDebug")
+require("CLO/Contexts/CLO_Context_PourGasInto")
+require("CLO/Contexts/CLO_Context_TakeFuelFromPump")
+
 ---OnLoad
 local function OnLoad()
     print(CLO_ModSettings.Name .. " v" .. tostring(CLO_ModSettings.Version) .. " has loaded!")
-
-    ---Do overrides
-    CLO_Override_ISAddGasolineToVehicle()
-    CLO_Override_ISTakeGasolineFromVehicle()
-    CLO_Override_ISVehicleMenu_FillPartMenu()
-    CLO_Override_ISVehiclePartMenu_getGasCanNotEmpty()
-    CLO_Override_ISVehiclePartMenu_getGasCanNotFull()
 
     for i = 1, #CLO_ModSettings.PreloadLogs do
         print(CLO_ModSettings.PreloadLogs[i])

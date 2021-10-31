@@ -11,4 +11,5 @@ ContextMenu_PTBR = {
 	ContextMenu_FuelDispenser = "Bomba de Gasolina",
 	ContextMenu_IsEmpty = "Vazio",
 	ContextMenu_FuelSource = "Fuel source",
+	ContextMenu_GeneratorAddFuelFrom = "Adicionar combustível de",
 }
