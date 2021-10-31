@@ -19,7 +19,7 @@ function ISDrinkFromDispenser:start()
     self:setActionAnim("drink_tap")
     self.sound = self.character:getEmitter():playSound("DrinkingFromTap")
     addSound(self.character, self.character:getX(), self.character:getY(), self.character:getZ(), 10, 1)
-    
+
     local waterAvailable = CLO_Object.GetObjectWaterAmount(self.dispenserObj)
     local thirst = self.character:getStats():getThirst()
     local waterNeeded = math.min(math.ceil(thirst / 0.1), 10)
@@ -30,14 +30,14 @@ end
 ---stopSound
 function ISDrinkFromDispenser:stopSound()
     if self.sound and self.character:getEmitter():isPlaying(self.sound) then
-		self.character:stopOrTriggerSound(self.sound);
-	end
+        self.character:stopOrTriggerSound(self.sound);
+    end
 end
 
 ---stop
 function ISDrinkFromDispenser:stop()
     self:stopSound()
-    
+
     local percentage = self.action:getJobDelta()
     self:drink(percentage)
 
@@ -47,7 +47,7 @@ end
 ---perform
 function ISDrinkFromDispenser:perform()
     self:stopSound()
-    
+
     local percentage = self.action:getJobDelta()
     self:drink(percentage)
 

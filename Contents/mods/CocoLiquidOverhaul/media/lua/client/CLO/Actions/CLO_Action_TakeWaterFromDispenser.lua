@@ -86,8 +86,8 @@ end
 ---stopSound
 function ISTakeWaterActionFromDispenser:stopSound()
     if self.sound and self.character:getEmitter():isPlaying(self.sound) then
-		self.character:stopOrTriggerSound(self.sound);
-	end
+        self.character:stopOrTriggerSound(self.sound);
+    end
 end
 
 ---stop
