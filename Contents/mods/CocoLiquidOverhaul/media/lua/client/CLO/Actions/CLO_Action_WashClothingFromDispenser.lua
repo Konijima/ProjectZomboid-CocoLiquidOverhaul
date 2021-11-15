@@ -1,3 +1,6 @@
+local functions = require("CLO/Functions")
+local DispenserTypes = require("CLO/DispenserTypes")
+
 CLO_Actions = CLO_Actions or {}
 
 require "TimedActions/ISBaseTimedAction"
@@ -5,7 +8,7 @@ local ISWashClothingFromDispenser = ISBaseTimedAction:derive("ISWashClothingFrom
 
 ---isValid
 function ISWashClothingFromDispenser:isValid()
-    if CLO_Object.GetObjectWaterAmount(self.dispenserObj) < ISWashClothingFromDispenser.GetRequiredWater(self.item) then
+    if functions.Object.GetObjectWaterAmount(self.dispenserObj) < ISWashClothingFromDispenser.GetRequiredWater(self.item) then
         return false
     end
     return true
@@ -113,11 +116,11 @@ function ISWashClothingFromDispenser:perform()
     self.character:resetModel();
     triggerEvent("OnClothingUpdated", self.character)
 
-    local waterAmount = CLO_Object.GetObjectWaterAmount(self.dispenserObj) - water
+    local waterAmount = functions.Object.GetObjectWaterAmount(self.dispenserObj) - water
     if waterAmount <= 0.01 then
-        CLO_Dispenser.TransformDispenserOnSquare(self.square, CLO_DispenserTypes.EmptyBottleDispenser, 0, false)
+        functions.Dispenser.TransformDispenserOnSquare(self.square, DispenserTypes.EmptyBottleDispenser, 0, false)
     else
-        CLO_Object.SetObjectWaterAmount(self.dispenserObj, waterAmount)
+        functions.Object.SetObjectWaterAmount(self.dispenserObj, waterAmount)
     end
 
     --local obj = self.sink

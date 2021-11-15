@@ -1,3 +1,6 @@
+local functions = require("CLO/Functions")
+local DispenserTypes = require("CLO/DispenserTypes")
+
 CLO_Contexts = CLO_Contexts or {}
 
 ---Context_Debug
@@ -15,35 +18,35 @@ local function Context_Debug(_playerNum, _context, _, test)
     local square = clickedSquare
 
     ---@type ISContextMenu
-    local subMenu = CLO_Context.CreateSubMenu(_context, "[DEBUG] CLO")
+    local subMenu = functions.Context.CreateSubMenu(_context, "[DEBUG] CLO")
 
     ---@type ItemContainer
     local inventory = playerObject:getInventory()
 
     if square then
         ---@type IsoObject
-        local dispenser = CLO_Dispenser.GetDispenserOnSquare(square)
+        local dispenser = functions.Dispenser.GetDispenserOnSquare(square)
 
         ---@type table
-        local dispenserType = CLO_Dispenser.GetDispenserType(dispenser)
+        local dispenserType = functions.Dispenser.GetDispenserType(dispenser)
 
         ---@type ISContextMenu
-        local dispenserSubMenu = CLO_Context.CreateSubMenu(subMenu, "Dispenser")
+        local dispenserSubMenu = functions.Context.CreateSubMenu(subMenu, "Dispenser")
 
         if dispenser then
 
             if dispenserType == "Dispenser" then
-                dispenserSubMenu:addOption("Convert", square, CLO_Dispenser.TransformDispenserOnSquare, CLO_DispenserTypes.WaterDispenser)
+                dispenserSubMenu:addOption("Convert", square, functions.Dispenser.TransformDispenserOnSquare, DispenserTypes.WaterDispenser)
             else
                 if dispenserType.CustomName == "Empty Dispenser" then
-                    local items = CLO_Inventory.GetAllItemOfMultipleTypesInInventory(inventory, {"Coco_WaterGallonEmpty", "Coco_WaterGallonFull", "Coco_WaterGallonPetrol"})
+                    local items = functions.Inventory.GetAllItemOfMultipleTypesInInventory(inventory, {"Coco_WaterGallonEmpty", "Coco_WaterGallonFull", "Coco_WaterGallonPetrol"})
                     if #items > 0 then
-                        local placeBottleOnDispenserSubMenu = CLO_Context.CreateSubMenu(dispenserSubMenu, "Add Bottle")
+                        local placeBottleOnDispenserSubMenu = functions.Context.CreateSubMenu(dispenserSubMenu, "Add Bottle")
                         for i = 1, #items do
                             local item = items[i]
                             local dispenserNewType
                             local tainted = false
-                            local liquidAmount = CLO_Inventory.GetDrainableItemContent(item)
+                            local liquidAmount = functions.Inventory.GetDrainableItemContent(item)
                             local toolTipPrefix = ""
                             if item:getType() == "Coco_WaterGallonFull" then
                                 if item:isTaintedWater() then
@@ -52,35 +55,35 @@ local function Context_Debug(_playerNum, _context, _, test)
                                 else
                                     toolTipPrefix = "Water: "
                                 end
-                                dispenserNewType = CLO_DispenserTypes.WaterDispenser
+                                dispenserNewType = DispenserTypes.WaterDispenser
                             elseif item:getType() == "Coco_WaterGallonPetrol" then
                                 toolTipPrefix = "Fuel: "
-                                dispenserNewType = CLO_DispenserTypes.FuelDispenser
+                                dispenserNewType = DispenserTypes.FuelDispenser
                             else
-                                dispenserNewType = CLO_DispenserTypes.EmptyBottleDispenser
+                                dispenserNewType = DispenserTypes.EmptyBottleDispenser
                             end
-                            local option = placeBottleOnDispenserSubMenu:addOption(item:getName(), square, CLO_Dispenser.TransformDispenserOnSquare, dispenserNewType, liquidAmount, tainted)
-                            CLO_Context.CreateOptionTooltip(option, toolTipPrefix .. CLO_Inventory.GetDrainableItemContentString(item))
+                            local option = placeBottleOnDispenserSubMenu:addOption(item:getName(), square, functions.Dispenser.TransformDispenserOnSquare, dispenserNewType, liquidAmount, tainted)
+                            functions.Context.CreateOptionTooltip(option, toolTipPrefix .. functions.Inventory.GetDrainableItemContentString(item))
                         end
                     end
                 else
-                    dispenserSubMenu:addOption("Remove Bottle", square, CLO_Dispenser.TransformDispenserOnSquare, CLO_DispenserTypes.EmptyDispenser, 0, false)
+                    dispenserSubMenu:addOption("Remove Bottle", square, functions.Dispenser.TransformDispenserOnSquare, DispenserTypes.EmptyDispenser, 0, false)
                 end
 
-                local rotateDispenserSubMenu = CLO_Context.CreateSubMenu(dispenserSubMenu, "Rotate")
-                rotateDispenserSubMenu:addOption("North", square, CLO_Dispenser.RotateDispenserOnSquare, dispenserType, "N")
-                rotateDispenserSubMenu:addOption("East", square, CLO_Dispenser.RotateDispenserOnSquare, dispenserType, "E")
-                rotateDispenserSubMenu:addOption("South", square, CLO_Dispenser.RotateDispenserOnSquare, dispenserType, "S")
-                rotateDispenserSubMenu:addOption("West", square, CLO_Dispenser.RotateDispenserOnSquare, dispenserType, "W")
+                local rotateDispenserSubMenu = functions.Context.CreateSubMenu(dispenserSubMenu, "Rotate")
+                rotateDispenserSubMenu:addOption("North", square, functions.Dispenser.RotateDispenserOnSquare, dispenserType, "N")
+                rotateDispenserSubMenu:addOption("East", square, functions.Dispenser.RotateDispenserOnSquare, dispenserType, "E")
+                rotateDispenserSubMenu:addOption("South", square, functions.Dispenser.RotateDispenserOnSquare, dispenserType, "S")
+                rotateDispenserSubMenu:addOption("West", square, functions.Dispenser.RotateDispenserOnSquare, dispenserType, "W")
             end
-            dispenserSubMenu:addOption("Delete", dispenser, CLO_Object.DeleteObject)
+            dispenserSubMenu:addOption("Delete", dispenser, functions.Object.DeleteObject)
         else
-            local addDispenserSubMenu = CLO_Context.CreateSubMenu(dispenserSubMenu, "Create")
-            addDispenserSubMenu:addOption("Default", square, CLO_Dispenser.CreateDispenserOnSquare, CLO_DispenserTypes.DefaultDispenser, "S", 0)
-            addDispenserSubMenu:addOption("No Bottle", square, CLO_Dispenser.CreateDispenserOnSquare, CLO_DispenserTypes.EmptyDispenser, "S", 0)
-            addDispenserSubMenu:addOption("Empty Bottle", square, CLO_Dispenser.CreateDispenserOnSquare, CLO_DispenserTypes.EmptyBottleDispenser, "S", 0)
-            addDispenserSubMenu:addOption("Water Bottle", square, CLO_Dispenser.CreateDispenserOnSquare, CLO_DispenserTypes.WaterDispenser, "S", 100)
-            addDispenserSubMenu:addOption("Gas Bottle", square, CLO_Dispenser.CreateDispenserOnSquare, CLO_DispenserTypes.FuelDispenser, "S", 100)
+            local addDispenserSubMenu = functions.Context.CreateSubMenu(dispenserSubMenu, "Create")
+            addDispenserSubMenu:addOption("Default", square, functions.Dispenser.CreateDispenserOnSquare, DispenserTypes.DefaultDispenser, "S", 0)
+            addDispenserSubMenu:addOption("No Bottle", square, functions.Dispenser.CreateDispenserOnSquare, DispenserTypes.EmptyDispenser, "S", 0)
+            addDispenserSubMenu:addOption("Empty Bottle", square, functions.Dispenser.CreateDispenserOnSquare, DispenserTypes.EmptyBottleDispenser, "S", 0)
+            addDispenserSubMenu:addOption("Water Bottle", square, functions.Dispenser.CreateDispenserOnSquare, DispenserTypes.WaterDispenser, "S", 100)
+            addDispenserSubMenu:addOption("Gas Bottle", square, functions.Dispenser.CreateDispenserOnSquare, DispenserTypes.FuelDispenser, "S", 100)
         end
     end
 end

@@ -1,4 +1,6 @@
-CLO_Print("Overriding: 'ISVehicleMenu.FillPartMenu'")
+local functions = require("CLO/Functions")
+
+functions.Print("Overriding: 'ISVehicleMenu.FillPartMenu'")
 
 local function tableContainText(options, text)
     for i, v in ipairs(options) do

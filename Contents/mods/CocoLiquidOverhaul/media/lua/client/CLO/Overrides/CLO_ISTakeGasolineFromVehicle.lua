@@ -1,4 +1,7 @@
-CLO_Print("Overriding: 'ISTakeGasolineFromVehicle:start'")
+local settings = require("CLO/Settings")
+local functions = require("CLO/Functions")
+
+functions.Print("Overriding: 'ISTakeGasolineFromVehicle:start'")
 
 local ISTakeGasolineFromVehicle_start = ISTakeGasolineFromVehicle.start
 function ISTakeGasolineFromVehicle:start()
@@ -7,8 +10,8 @@ function ISTakeGasolineFromVehicle:start()
     else
         local itemType = self.item:getType()
         local customFuelItem = nil
-        for i = 1, #CLO_ModSettings.CustomFuelItems do
-            local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+        for i = 1, #settings.CustomFuelItems do
+            local fuelItem = settings.CustomFuelItems[i]
             if itemType == fuelItem.empty then
                 customFuelItem = fuelItem
                 break
@@ -45,7 +48,7 @@ function ISTakeGasolineFromVehicle:start()
     end
 end
 
-CLO_Print("Overriding: 'ISTakeGasolineFromVehicle:update'")
+functions.Print("Overriding: 'ISTakeGasolineFromVehicle:update'")
 
 local ISTakeGasolineFromVehicle_update = ISTakeGasolineFromVehicle.update
 function ISTakeGasolineFromVehicle:update()
@@ -71,7 +74,7 @@ function ISTakeGasolineFromVehicle:update()
     end
 end
 
-CLO_Print("Overriding: 'ISTakeGasolineFromVehicle:perform'")
+functions.Print("Overriding: 'ISTakeGasolineFromVehicle:perform'")
 
 local ISTakeGasolineFromVehicle_perform = ISTakeGasolineFromVehicle.perform
 function ISTakeGasolineFromVehicle:perform()

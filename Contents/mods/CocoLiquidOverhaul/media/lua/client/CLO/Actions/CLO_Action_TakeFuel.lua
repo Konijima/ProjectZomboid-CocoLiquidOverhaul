@@ -1,3 +1,5 @@
+local settings = require("CLO/Settings")
+
 CLO_Actions = CLO_Actions or {}
 
 require "TimedActions/ISBaseTimedAction"
@@ -36,9 +38,9 @@ function TakeFuel:start()
     --- check if current item is empty
     local itemType = self.petrolCan:getType()
     local isEmpty = itemType == "EmptyPetrolCan"
-    local customEmpty = nil
-    for i = 1, #CLO_ModSettings.CustomFuelItems do
-        local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+    local customEmpty
+    for i = 1, #settings.CustomFuelItems do
+        local fuelItem = settings.CustomFuelItems[i]
         if not isEmpty and itemType == fuelItem.empty then
             customEmpty = fuelItem
             break

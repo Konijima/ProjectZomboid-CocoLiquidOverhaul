@@ -1,3 +1,6 @@
+local settings = require("CLO/Settings")
+local functions = require("CLO/Functions")
+
 CLO_Contexts = CLO_Contexts or {}
 
 ---onBurnCorpse
@@ -27,9 +30,9 @@ local function Context_BurnCorpse(player, context, worldobjects, test)
     body = IsoObjectPicker.Instance:PickCorpse(square:getX(), square:getY()) or body
     if body then
         local customFuelItem = nil
-        for i = 1, #CLO_ModSettings.CustomFuelItems do
-            local fuelItem = CLO_ModSettings.CustomFuelItems[i]
-            customFuelItem = CLO_Inventory.GetFirstItemOfTypeInInventory(playerInv, fuelItem.full)
+        for i = 1, #settings.CustomFuelItems do
+            local fuelItem = settings.CustomFuelItems[i]
+            customFuelItem = functions.Inventory.GetFirstItemOfTypeInInventory(playerInv, fuelItem.full)
             if customFuelItem then
                 break
             end

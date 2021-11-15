@@ -1,12 +1,15 @@
-CLO_Print("Overriding: 'ISAddGasolineToVehicle:start'")
+local settings = require("CLO/Settings")
+local functions = require("CLO/Functions")
+
+functions.Print("Overriding: 'ISAddGasolineToVehicle:start'")
 
 local ISAddGasolineToVehicle_start = ISAddGasolineToVehicle.start
 function ISAddGasolineToVehicle:start()
     local itemType = self.item:getType()
 
     local customFuelItem = nil
-    for i = 1, #CLO_ModSettings.CustomFuelItems do
-        local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+    for i = 1, #settings.CustomFuelItems do
+        local fuelItem = settings.CustomFuelItems[i]
         if itemType == fuelItem.empty then
             customFuelItem = fuelItem
             break
@@ -45,7 +48,7 @@ function ISAddGasolineToVehicle:start()
     self:setOverrideHandModels(self.item:getStaticModel(), nil)
 end
 
-CLO_Print("Overriding: 'ISAddGasolineToVehicle:update'")
+functions.Print("Overriding: 'ISAddGasolineToVehicle:update'")
 
 local ISAddGasolineToVehicle_update = ISAddGasolineToVehicle.update
 function ISAddGasolineToVehicle:update()
@@ -68,7 +71,7 @@ function ISAddGasolineToVehicle:update()
     self.character:setMetabolicTarget(Metabolics.HeavyDomestic);
 end
 
-CLO_Print("Overriding: 'ISAddGasolineToVehicle:perform'")
+functions.Print("Overriding: 'ISAddGasolineToVehicle:perform'")
 
 local ISAddGasolineToVehicle_perform = ISAddGasolineToVehicle.perform
 function ISAddGasolineToVehicle:perform()

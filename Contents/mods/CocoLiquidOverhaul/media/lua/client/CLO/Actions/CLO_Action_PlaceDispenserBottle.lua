@@ -1,3 +1,6 @@
+local functions = require("CLO/Functions")
+local DispenserTypes = require("CLO/DispenserTypes")
+
 CLO_Actions = CLO_Actions or {}
 
 require "TimedActions/ISBaseTimedAction"
@@ -48,17 +51,17 @@ function ISPlaceDispenserBottle:perform()
     local taintedWater = false
 
     if self.bottleItem:IsDrainable() then
-        liquidAmount = CLO_Inventory.GetDrainableItemContent(self.bottleItem)
+        liquidAmount = functions.Inventory.GetDrainableItemContent(self.bottleItem)
     end
 
     local dispenserType
     if self.bottleItemType == "Coco_WaterGallonEmpty" then
-        dispenserType = CLO_DispenserTypes.EmptyBottleDispenser
+        dispenserType = DispenserTypes.EmptyBottleDispenser
     elseif self.bottleItemType == "Coco_WaterGallonFull" then
-        dispenserType = CLO_DispenserTypes.WaterDispenser
+        dispenserType = DispenserTypes.WaterDispenser
         taintedWater = self.bottleItem:isTaintedWater()
     elseif self.bottleItemType == "Coco_WaterGallonPetrol" then
-        dispenserType = CLO_DispenserTypes.FuelDispenser
+        dispenserType = DispenserTypes.FuelDispenser
     end
 
     if self.character:getPrimaryHandItem() == self.bottleItem then
@@ -69,7 +72,7 @@ function ISPlaceDispenserBottle:perform()
 
     self.character:getInventory():Remove(self.bottleItem)
 
-    CLO_Dispenser.TransformDispenserOnSquare(self.square, dispenserType, liquidAmount, taintedWater)
+    functions.Dispenser.TransformDispenserOnSquare(self.square, dispenserType, liquidAmount, taintedWater)
     ISBaseTimedAction.perform(self)
 end
 

@@ -1,3 +1,5 @@
+local functions = require("CLO/Functions")
+
 CLO_Contexts = CLO_Contexts or {}
 
 ---Context_InventoryDebug
@@ -12,16 +14,16 @@ local function Context_InventoryDebug(_playerNum, _context, _items)
     local playerObject = getSpecificPlayer(_playerNum)
 
     ---@type table
-    local items = CLO_Context.ConvertInventoryItemsToArray(_items)
+    local items = functions.Context.ConvertInventoryItemsToArray(_items)
 
     ---@type ISContextMenu
-    local subMenu = CLO_Context.CreateSubMenu(_context, "[DEBUG] CLO")
+    local subMenu = functions.Context.CreateSubMenu(_context, "[DEBUG] CLO")
 
     if #items > 1 then
-        subMenu:addOption("Delete " .. #items .. " items", playerObject, CLO_Inventory.RemoveItems, items)
+        subMenu:addOption("Delete " .. #items .. " items", playerObject, functions.Inventory.RemoveItems, items)
     else
         local item = items[1]
-        subMenu:addOption("Delete " .. item:getName(), playerObject, CLO_Inventory.RemoveItems, items)
+        subMenu:addOption("Delete " .. item:getName(), playerObject, functions.Inventory.RemoveItems, items)
     end
 end
 

@@ -1,3 +1,6 @@
+local functions = require("CLO/Functions")
+local DispenserTypes = require("CLO/DispenserTypes")
+
 CLO_Actions = CLO_Actions or {}
 
 require "TimedActions/ISBaseTimedAction"
@@ -38,21 +41,21 @@ function ISTakeDispenserBottle:perform()
     local taintedWater = false
     local inventory = self.character:getInventory()
 
-    local dispenserType = CLO_Dispenser.GetDispenserType(self.dispenserObj)
-    if dispenserType == CLO_DispenserTypes.EmptyBottleDispenser then
+    local dispenserType = functions.Dispenser.GetDispenserType(self.dispenserObj)
+    if dispenserType == DispenserTypes.EmptyBottleDispenser then
         item = inventory:AddItem("CocoLiquidOverhaulItems.Coco_WaterGallonEmpty")
-    elseif dispenserType == CLO_DispenserTypes.WaterDispenser then
-        taintedWater = CLO_Object.GetObjectWaterTainted(self.dispenserObj)
-        liquidAmount = CLO_Object.GetObjectWaterAmount(self.dispenserObj)
-        liquidMax = CLO_Object.GetObjectWaterMax(self.dispenserObj)
+    elseif dispenserType == DispenserTypes.WaterDispenser then
+        taintedWater = functions.Object.GetObjectWaterTainted(self.dispenserObj)
+        liquidAmount = functions.Object.GetObjectWaterAmount(self.dispenserObj)
+        liquidMax = functions.Object.GetObjectWaterMax(self.dispenserObj)
         item = inventory:AddItem("CocoLiquidOverhaulItems.Coco_WaterGallonFull")
         if taintedWater then
             item:setTaintedWater(true)
         end
         item:setUsedDelta(liquidAmount / liquidMax)
-    elseif dispenserType == CLO_DispenserTypes.FuelDispenser then
-        liquidAmount = CLO_Object.GetObjectFuelAmount(self.dispenserObj)
-        liquidMax = CLO_Object.GetObjectFuelMax(self.dispenserObj)
+    elseif dispenserType == DispenserTypes.FuelDispenser then
+        liquidAmount = functions.Object.GetObjectFuelAmount(self.dispenserObj)
+        liquidMax = functions.Object.GetObjectFuelMax(self.dispenserObj)
         item = inventory:AddItem("CocoLiquidOverhaulItems.Coco_WaterGallonPetrol")
         item:setUsedDelta(liquidAmount / liquidMax)
     end
@@ -63,7 +66,7 @@ function ISTakeDispenserBottle:perform()
         self.character:setSecondaryHandItem(item)
     end
 
-    CLO_Dispenser.TransformDispenserOnSquare(self.square, CLO_DispenserTypes.EmptyDispenser, 0, false)
+    functions.Dispenser.TransformDispenserOnSquare(self.square, DispenserTypes.EmptyDispenser, 0, false)
 
     ISBaseTimedAction.perform(self)
 end

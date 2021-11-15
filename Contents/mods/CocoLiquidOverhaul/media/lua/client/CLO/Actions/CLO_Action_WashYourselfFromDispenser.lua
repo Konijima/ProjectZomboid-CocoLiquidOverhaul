@@ -1,3 +1,6 @@
+local functions = require("CLO/Functions")
+local DispenserTypes = require("CLO/DispenserTypes")
+
 CLO_Actions = CLO_Actions or {}
 
 require "TimedActions/ISBaseTimedAction"
@@ -33,17 +36,17 @@ function ISWashYourselfFromDispenser:perform()
         local part = BloodBodyPartType.FromIndex(i-1)
         if self:washPart(visual, part) then
             waterUsed = waterUsed + 1
-            if waterUsed >= CLO_Object.GetObjectWaterAmount(self.dispenserObj) then
+            if waterUsed >= functions.Object.GetObjectWaterAmount(self.dispenserObj) then
                 break
             end
         end
     end
 
-    local waterAmount = CLO_Object.GetObjectWaterAmount(self.dispenserObj) - waterUsed
+    local waterAmount = functions.Object.GetObjectWaterAmount(self.dispenserObj) - waterUsed
     if waterAmount <= 0.01 then
-        CLO_Dispenser.TransformDispenserOnSquare(self.square, CLO_DispenserTypes.EmptyBottleDispenser, 0, false)
+        functions.Dispenser.TransformDispenserOnSquare(self.square, DispenserTypes.EmptyBottleDispenser, 0, false)
     else
-        CLO_Object.SetObjectWaterAmount(self.dispenserObj, waterAmount)
+        functions.Object.SetObjectWaterAmount(self.dispenserObj, waterAmount)
     end
 
     self.character:resetModelNextFrame();
@@ -137,9 +140,9 @@ function ISWashYourselfFromDispenser.GetRequiredSoap(character)
 end
 
 ---new
----@param playerObj IsoPlayer
+---@param character IsoPlayer
 ---@param dispenserObj IsoObject
----@param time number
+---@param soapList table
 function ISWashYourselfFromDispenser:new(character, dispenserObj, soapList)
     local o = {}
     setmetatable(o, self)
@@ -148,7 +151,7 @@ function ISWashYourselfFromDispenser:new(character, dispenserObj, soapList)
     o.square = dispenserObj:getSquare()
     o.dispenserObj = dispenserObj
     o.soaps = soapList
-    local waterUnits = math.min(ISWashYourselfFromDispenser.GetRequiredWater(character), CLO_Object.GetObjectWaterAmount(dispenserObj))
+    local waterUnits = math.min(ISWashYourselfFromDispenser.GetRequiredWater(character), functions.Object.GetObjectWaterAmount(dispenserObj))
     o.maxTime = waterUnits * 70
     o.stopOnWalk = true
     o.stopOnRun = true

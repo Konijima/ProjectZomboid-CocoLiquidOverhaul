@@ -1,3 +1,6 @@
+local settings = require("CLO/Settings")
+local functions = require("CLO/Functions")
+
 CLO_Contexts = CLO_Contexts or {}
 
 ---Context_InteractWithGenerator
@@ -17,19 +20,19 @@ local function Context_InteractWithGenerator(player, context, worldobjects, test
 
         if not generator:isActivated() and generator:getFuel() < 100 then
 
-            local allPetrolCans = CLO_Inventory.GetAllNotEmptyDrainableItemOfTypeInInventory(playerInv, "PetrolCan")
-            for i=1, #CLO_ModSettings.CustomFuelItems do
-                local item = CLO_ModSettings.CustomFuelItems[i]
-                local list = CLO_Inventory.GetAllNotEmptyDrainableItemOfTypeInInventory(playerInv, item.full)
+            local allPetrolCans = functions.Inventory.GetAllNotEmptyDrainableItemOfTypeInInventory(playerInv, "PetrolCan")
+            for i=1, #settings.CustomFuelItems do
+                local item = settings.CustomFuelItems[i]
+                local list = functions.Inventory.GetAllNotEmptyDrainableItemOfTypeInInventory(playerInv, item.full)
                 for l=1, #list do
                     table.insert(allPetrolCans, list[l])
                 end
             end
             if #allPetrolCans > 0 then
-                local subMenu = CLO_Context.CreateSubMenu(context, getText("ContextMenu_GeneratorAddFuelFrom"))
+                local subMenu = functions.Context.CreateSubMenu(context, getText("ContextMenu_GeneratorAddFuelFrom"))
                 for _, petrolCan in pairs(allPetrolCans) do
                     local option = subMenu:addOption(petrolCan:getName(), worldobjects, ISWorldObjectContextMenu.onAddFuel, petrolCan, generator, player);
-                    CLO_Context.CreateOptionTooltip(option, getText("ContextMenu_FuelName") .. ": " .. CLO_Inventory.GetDrainableItemContentString(petrolCan))
+                    functions.Context.CreateOptionTooltip(option, getText("ContextMenu_FuelName") .. ": " .. functions.Inventory.GetDrainableItemContentString(petrolCan))
                 end
             end
         end

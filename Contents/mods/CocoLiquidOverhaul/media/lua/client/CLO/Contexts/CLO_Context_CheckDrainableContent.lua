@@ -1,3 +1,6 @@
+local settings = require("CLO/Settings")
+local functions = require("CLO/Functions")
+
 CLO_Contexts = CLO_Contexts or {}
 
 ---Context_CheckDrainableContent
@@ -7,7 +10,7 @@ CLO_Contexts = CLO_Contexts or {}
 local function Context_CheckDrainableContent(_playerNum, _context, _items)
 
     ---@type table
-    local items = CLO_Context.ConvertInventoryItemsToArray(_items)
+    local items = functions.Context.ConvertInventoryItemsToArray(_items)
 
     if #items == 1 then
         ---@type InventoryItem
@@ -15,8 +18,8 @@ local function Context_CheckDrainableContent(_playerNum, _context, _items)
         local type = item:getType()
 
         local customFuelItem = nil
-        for i = 1, #CLO_ModSettings.CustomFuelItems do
-            local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+        for i = 1, #settings.CustomFuelItems do
+            local fuelItem = settings.CustomFuelItems[i]
             if type == fuelItem.full then
                 customFuelItem = fuelItem
                 break
@@ -27,18 +30,18 @@ local function Context_CheckDrainableContent(_playerNum, _context, _items)
 
             if item:IsDrainable() and item:isWaterSource() then
                 local option = _context:addOption(item:getName())
-                local toolTip = CLO_Context.CreateOptionTooltip(option, getText("ContextMenu_WaterName") .. ": " .. CLO_Inventory.GetDrainableItemContentString(item))
+                local toolTip = functions.Context.CreateOptionTooltip(option, getText("ContextMenu_WaterName") .. ": " .. functions.Inventory.GetDrainableItemContentString(item))
                 if item:isTaintedWater() then
                     toolTip.description = toolTip.description .. " <BR> <RGB:1,0.5,0.5> " .. getText("Tooltip_item_TaintedWater")
                 end
 
             elseif item:IsDrainable() and not item:isWaterSource() then
                 local option = _context:addOption(item:getName())
-                CLO_Context.CreateOptionTooltip(option, getText("ContextMenu_FuelName") .. ": " .. CLO_Inventory.GetDrainableItemContentString(item))
+                functions.Context.CreateOptionTooltip(option, getText("ContextMenu_FuelName") .. ": " .. functions.Inventory.GetDrainableItemContentString(item))
 
             elseif not item:IsDrainable() and item:canStoreWater() then
                 local option = _context:addOption(item:getName())
-                CLO_Context.CreateOptionTooltip(option, getText("ContextMenu_IsEmpty"))
+                functions.Context.CreateOptionTooltip(option, getText("ContextMenu_IsEmpty"))
             end
         end
     end

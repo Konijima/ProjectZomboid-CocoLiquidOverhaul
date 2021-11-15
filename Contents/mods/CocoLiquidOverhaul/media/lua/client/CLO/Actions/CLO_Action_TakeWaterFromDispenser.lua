@@ -1,3 +1,6 @@
+local functions = require("CLO/Functions")
+local DispenserTypes = require("CLO/DispenserTypes")
+
 CLO_Actions = CLO_Actions or {}
 
 require "TimedActions/ISBaseTimedAction"
@@ -8,10 +11,10 @@ local ISTakeWaterActionFromDispenser = ISBaseTimedAction:derive("ISTakeWaterActi
 function ISTakeWaterActionFromDispenser:isValid()
     if self.oldItem ~= nil then
         if self.oldItem and not self.oldItem:getContainer() then return false end
-        return CLO_Object.GetObjectWaterAmount(self.waterObject) > 0
+        return functions.Object.GetObjectWaterAmount(self.waterObject) > 0
     end
     if self.item and not self.item:getContainer() then return false end
-    return CLO_Object.GetObjectWaterAmount(self.waterObject) > 0
+    return functions.Object.GetObjectWaterAmount(self.waterObject) > 0
 end
 
 ---waitToStart
@@ -35,7 +38,7 @@ end
 
 ---start
 function ISTakeWaterActionFromDispenser:start()
-    local waterAvailable = CLO_Object.GetObjectWaterAmount(self.waterObject)
+    local waterAvailable = functions.Object.GetObjectWaterAmount(self.waterObject)
 
     if self.oldItem ~= nil then
         self.character:getInventory():AddItem(self.item)
@@ -96,11 +99,11 @@ function ISTakeWaterActionFromDispenser:stop()
 
     local used = self:getJobDelta() * self.waterUnit
     if used >= 1 then
-        local waterAmount = CLO_Object.GetObjectWaterAmount(self.waterObject) - used
+        local waterAmount = functions.Object.GetObjectWaterAmount(self.waterObject) - used
         if waterAmount <= 0.01 then
-            CLO_Dispenser.TransformDispenserOnSquare(self.square, CLO_DispenserTypes.EmptyBottleDispenser, 0, false)
+            functions.Dispenser.TransformDispenserOnSquare(self.square, DispenserTypes.EmptyBottleDispenser, 0, false)
         else
-            CLO_Object.SetObjectWaterAmount(self.waterObject, waterAmount)
+            functions.Object.SetObjectWaterAmount(self.waterObject, waterAmount)
         end
         --local obj = self.waterObject
         --local args = {x=obj:getX(), y=obj:getY(), z=obj:getZ(), units=used}
@@ -110,7 +113,7 @@ function ISTakeWaterActionFromDispenser:stop()
     if self.item ~= nil then
         self.item:setBeingFilled(false)
         self.item:setJobDelta(0.0)
-        if CLO_Object.GetObjectWaterTainted(self.waterObject) then
+        if functions.Object.GetObjectWaterTainted(self.waterObject) then
             self.item:setTaintedWater(true)
         end
     end
@@ -126,7 +129,7 @@ function ISTakeWaterActionFromDispenser:perform()
         self.item:setBeingFilled(false)
         self.item:getContainer():setDrawDirty(true)
         self.item:setJobDelta(0.0)
-        if CLO_Object.GetObjectWaterTainted(self.waterObject)then
+        if functions.Object.GetObjectWaterTainted(self.waterObject)then
             self.item:setTaintedWater(true)
         end
         --Without this setUsedDelta call, the final tick never goes through.
@@ -138,16 +141,16 @@ function ISTakeWaterActionFromDispenser:perform()
     else
         local thirst = self.character:getStats():getThirst() - (self.waterUnit / 10)
         self.character:getStats():setThirst(math.max(thirst, 0.0))
-        if CLO_Object.GetObjectWaterTainted(self.waterObject) then
+        if functions.Object.GetObjectWaterTainted(self.waterObject) then
             self.character:getBodyDamage():setPoisonLevel(self.character:getBodyDamage():getPoisonLevel() + self.waterUnit)
         end
     end
 
-    local waterAmount = CLO_Object.GetObjectWaterAmount(self.waterObject) - self.waterUnit
+    local waterAmount = functions.Object.GetObjectWaterAmount(self.waterObject) - self.waterUnit
     if waterAmount <= 0.01 then
-        CLO_Dispenser.TransformDispenserOnSquare(self.square, CLO_DispenserTypes.EmptyBottleDispenser, 0, false)
+        functions.Dispenser.TransformDispenserOnSquare(self.square, DispenserTypes.EmptyBottleDispenser, 0, false)
     else
-        CLO_Object.SetObjectWaterAmount(self.waterObject, waterAmount)
+        functions.Object.SetObjectWaterAmount(self.waterObject, waterAmount)
     end
 
     --local obj = self.waterObject
@@ -157,7 +160,7 @@ function ISTakeWaterActionFromDispenser:perform()
     ISBaseTimedAction.perform(self)
 end
 
-function ISTakeWaterActionFromDispenser:new (character, item, waterUnit, waterObject, time, oldItem)
+function ISTakeWaterActionFromDispenser:new (character, item, waterUnit, waterObject, oldItem)
     local o = {}
     setmetatable(o, self)
     self.__index = self

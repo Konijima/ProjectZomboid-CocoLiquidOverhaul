@@ -1,3 +1,6 @@
+local settings = require("CLO/Settings")
+local functions = require("CLO/Functions")
+
 CLO_Contexts = CLO_Contexts or {}
 
 ---doPourInto
@@ -15,8 +18,8 @@ local function doPourInto(playerObj, itemFrom, itemTo)
         itemTo = inventory:AddItem("Base.PetrolCan")
         itemTo:setUsedDelta(0)
     else
-        for i = 1, #CLO_ModSettings.CustomFuelItems do
-            local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+        for i = 1, #settings.CustomFuelItems do
+            local fuelItem = settings.CustomFuelItems[i]
             if itemTo:getType() == fuelItem.empty then
                 inventory:Remove(itemTo)
                 itemTo = inventory:AddItem(fuelItem.module .. "." .. fuelItem.full)
@@ -66,7 +69,7 @@ local function Context_PourGasInto(_playerNum, _context, _items)
     local inventory = playerObject:getInventory()
 
     ---@type table
-    local items = CLO_Context.ConvertInventoryItemsToArray(_items)
+    local items = functions.Context.ConvertInventoryItemsToArray(_items)
 
     if #items == 1 then
 
@@ -74,8 +77,8 @@ local function Context_PourGasInto(_playerNum, _context, _items)
         local type = item:getType()
 
         local customFuelItem = nil
-        for i = 1, #CLO_ModSettings.CustomFuelItems do
-            local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+        for i = 1, #settings.CustomFuelItems do
+            local fuelItem = settings.CustomFuelItems[i]
             if type == fuelItem.full then
                 customFuelItem = fuelItem
                 break
@@ -84,11 +87,11 @@ local function Context_PourGasInto(_playerNum, _context, _items)
 
         if (item:getType() == "PetrolCan" or customFuelItem ~= nil) and item:getUsedDelta() > 0 then
 
-            local drainables = CLO_Inventory.GetAllNotFullDrainableItemOfTypeInInventory(inventory, "EmptyPetrolCan", "PetrolCan")
+            local drainables = functions.Inventory.GetAllNotFullDrainableItemOfTypeInInventory(inventory, "EmptyPetrolCan", "PetrolCan")
 
-            for i = 1, #CLO_ModSettings.CustomFuelItems do
-                local fuelItem = CLO_ModSettings.CustomFuelItems[i]
-                local petrolCans = CLO_Inventory.GetAllNotFullDrainableItemOfTypeInInventory(inventory, fuelItem.empty, fuelItem.full)
+            for i = 1, #settings.CustomFuelItems do
+                local fuelItem = settings.CustomFuelItems[i]
+                local petrolCans = functions.Inventory.GetAllNotFullDrainableItemOfTypeInInventory(inventory, fuelItem.empty, fuelItem.full)
                 for _,v in ipairs(petrolCans) do
                     if v ~= item then
                         table.insert(drainables, v)
@@ -97,14 +100,14 @@ local function Context_PourGasInto(_playerNum, _context, _items)
             end
 
             if #drainables > 0 then
-                local pourSubMenu = CLO_Context.CreateSubMenu(_context, getText("ContextMenu_Pour_into"))
+                local pourSubMenu = functions.Context.CreateSubMenu(_context, getText("ContextMenu_Pour_into"))
                 for i = 1, #drainables do
                     local drainable = drainables[i]
                     if drainable ~= item then
                         local option = pourSubMenu:addOption(drainable:getName(), playerObject, doPourInto, item, drainable)
-                        local tooltip = CLO_Context.CreateOptionTooltip(option, "")
-                        if CLO_Inventory.GetDrainableItemContent(drainable) > 0 then
-                            tooltip.description = getText("ContextMenu_FuelName") .. ": " .. CLO_Inventory.GetDrainableItemContentString(drainable)
+                        local tooltip = functions.Context.CreateOptionTooltip(option, "")
+                        if functions.Inventory.GetDrainableItemContent(drainable) > 0 then
+                            tooltip.description = getText("ContextMenu_FuelName") .. ": " .. functions.Inventory.GetDrainableItemContentString(drainable)
                         else
                             tooltip.description = getText("ContextMenu_IsEmpty")
                         end

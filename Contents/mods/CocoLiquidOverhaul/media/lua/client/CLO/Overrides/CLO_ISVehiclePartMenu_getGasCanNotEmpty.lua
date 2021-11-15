@@ -1,12 +1,15 @@
-CLO_Print("Overriding: 'ISVehiclePartMenu.getGasCanNotEmpty'")
+local settings = require("CLO/Settings")
+local functions = require("CLO/Functions")
+
+functions.Print("Overriding: 'ISVehiclePartMenu.getGasCanNotEmpty'")
 
 local ISVehiclePartMenu_getGasCanNotEmpty = ISVehiclePartMenu.getGasCanNotEmpty
 function ISVehiclePartMenu.getGasCanNotEmpty(playerObj, typeToItem)
     local gasCan = ISVehiclePartMenu_getGasCanNotEmpty(playerObj, typeToItem)
     if not gasCan then
         local customFuelItem = nil
-        for i = 1, #CLO_ModSettings.CustomFuelItems do
-            local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+        for i = 1, #settings.CustomFuelItems do
+            local fuelItem = settings.CustomFuelItems[i]
             if typeToItem[fuelItem.module .. "." .. fuelItem.full] then
                 customFuelItem = fuelItem
                 break

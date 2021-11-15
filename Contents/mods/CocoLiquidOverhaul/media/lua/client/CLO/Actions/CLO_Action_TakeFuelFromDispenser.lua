@@ -1,3 +1,6 @@
+local functions = require("CLO/Functions")
+local DispenserTypes = require("CLO/DispenserTypes")
+
 CLO_Actions = CLO_Actions or {}
 
 require "TimedActions/ISBaseTimedAction"
@@ -5,7 +8,7 @@ local ISTakeFuelFromDispenser = ISBaseTimedAction:derive("ISTakeFuelFromDispense
 
 ---isValid
 function ISTakeFuelFromDispenser:isValid()
-    local pumpCurrent = CLO_Object.GetObjectFuelAmount(self.dispenserObj)
+    local pumpCurrent = functions.Object.GetObjectFuelAmount(self.dispenserObj)
     return pumpCurrent > 0
 end
 
@@ -23,9 +26,9 @@ function ISTakeFuelFromDispenser:start()
     -- let's transform an empty can into an empty petrol can
     local itemType = self.petrolCan:getType()
 
-    local customItem = nil
-    for i = 1, #CLO_ModSettings.CustomFuelItems do
-        local fuelItem = CLO_ModSettings.CustomFuelItems[i]
+    local customItem
+    for i = 1, #settings.CustomFuelItems do
+        local fuelItem = settings.CustomFuelItems[i]
         if itemType == fuelItem.empty or itemType == fuelItem.full then
             customItem = fuelItem
             break
@@ -50,7 +53,7 @@ function ISTakeFuelFromDispenser:start()
         self.character:getInventory():Remove(emptyCan)
     end
 
-    local pumpCurrent = CLO_Object.GetObjectFuelAmount(self.dispenserObj)
+    local pumpCurrent = functions.Object.GetObjectFuelAmount(self.dispenserObj)
     local itemCurrent = math.floor(self.petrolCan:getUsedDelta() / self.petrolCan:getUseDelta() + 0.001)
     local itemMax = math.floor(1 / self.petrolCan:getUseDelta() + 0.001)
     local take = math.min(pumpCurrent, itemMax - itemCurrent)
@@ -77,15 +80,15 @@ function ISTakeFuelFromDispenser:update()
     local itemCurrent = math.floor(self.petrolCan:getUsedDelta() / self.petrolCan:getUseDelta() + 0.001)
     if actionCurrent > itemCurrent then
         -- FIXME: sync in multiplayer
-        local pumpCurrent = CLO_Object.GetObjectFuelAmount(self.dispenserObj) - (actionCurrent - itemCurrent)
-        CLO_Print("Fuel: " .. tostring(pumpCurrent) .. "/" .. tostring(itemCurrent))
+        local pumpCurrent = functions.Object.GetObjectFuelAmount(self.dispenserObj) - (actionCurrent - itemCurrent)
+        functions.Print("Fuel: " .. tostring(pumpCurrent) .. "/" .. tostring(itemCurrent))
 
         if pumpCurrent <= 0.01 then
-            CLO_Dispenser.TransformDispenserOnSquare(self.square, CLO_DispenserTypes.EmptyBottleDispenser, 0, false)
+            functions.Dispenser.TransformDispenserOnSquare(self.square, DispenserTypes.EmptyBottleDispenser, 0, false)
             ISBaseTimedAction.stop(self)
             return
         else
-            CLO_Object.SetObjectFuelAmount(self.dispenserObj, pumpCurrent)
+            functions.Object.SetObjectFuelAmount(self.dispenserObj, pumpCurrent)
         end
 
         self.petrolCan:setUsedDelta(actionCurrent * self.petrolCan:getUseDelta())
@@ -103,11 +106,11 @@ function ISTakeFuelFromDispenser:perform()
         self.petrolCan:setUsedDelta(self.itemTarget * self.petrolCan:getUseDelta())
         -- FIXME: sync in multiplayer
 
-        local pumpCurrent = CLO_Object.GetObjectFuelAmount(self.dispenserObj) + (self.itemTarget - itemCurrent)
+        local pumpCurrent = functions.Object.GetObjectFuelAmount(self.dispenserObj) + (self.itemTarget - itemCurrent)
         if pumpCurrent <= 0.01 then
-            CLO_Dispenser.TransformDispenserOnSquare(self.square, CLO_DispenserTypes.EmptyBottleDispenser, 0, false)
+            functions.Dispenser.TransformDispenserOnSquare(self.square, DispenserTypes.EmptyBottleDispenser, 0, false)
         else
-            CLO_Object.SetObjectFuelAmount(self.dispenserObj, pumpCurrent)
+            functions.Object.SetObjectFuelAmount(self.dispenserObj, pumpCurrent)
         end
     end
 
@@ -116,7 +119,7 @@ end
 
 ---new
 ---@param playerObj IsoPlayer
----@param square IsoGridSquare
+---@param dispenserObj IsoObject
 ---@param petrolCan InventoryItem
 function ISTakeFuelFromDispenser:new(playerObj, dispenserObj, petrolCan, maxTime)
     local o = {}
