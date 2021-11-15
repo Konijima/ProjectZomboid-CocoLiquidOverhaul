@@ -1,5 +1,5 @@
-local functions = require("CLO/Functions")
-local modSettings = require("CLO/Settings")
+local Print = require("CLO/Functions/Print")
+local settings = require("CLO/Settings")
 
 ---@class ObjectFunctions
 local ObjectFunctions = {}
@@ -49,8 +49,8 @@ end
 ---@param _waterAmount number
 function ObjectFunctions.SetObjectWaterAmount(_object, _waterAmount)
     if not instanceof(_object, "IsoObject") then return end
-    if not _waterAmount then _waterAmount = modSettings.DispenserAmountMax end
-    if _waterAmount > modSettings.DispenserAmountMax then _waterAmount = modSettings.DispenserAmountMax end
+    if not _waterAmount then _waterAmount = settings.DispenserAmountMax end
+    if _waterAmount > settings.DispenserAmountMax then _waterAmount = settings.DispenserAmountMax end
     _object:getModData().waterAmount = 0
     _object:getModData().amountWater = _waterAmount
 end
@@ -86,7 +86,7 @@ end
 function ObjectFunctions.SetObjectFuelAmount(_object, _fuelAmount)
     if not instanceof(_object, "IsoObject") then return end
     if not _fuelAmount then _fuelAmount = 0 end
-    if _fuelAmount > modSettings.DispenserAmountMax then _fuelAmount = modSettings.DispenserAmountMax end
+    if _fuelAmount > settings.DispenserAmountMax then _fuelAmount = settings.DispenserAmountMax end
     _object:getModData().amountFuel = _fuelAmount
 end
 
@@ -114,7 +114,7 @@ function ObjectFunctions.CreateObject(_spriteName, _square)
     if not instanceof(_square, "IsoGridSquare") then return end
     local obj = IsoObject.new(_square, _spriteName, "")
     _square:AddTileObject(obj)
-    functions.Print("Created object " .. _spriteName .. " on square x:" .. _square:getX() .. " y:" .. _square:getY())
+    Print("Created object " .. _spriteName .. " on square x:" .. _square:getX() .. " y:" .. _square:getY())
     return obj
 end
 
@@ -127,7 +127,7 @@ function ObjectFunctions.DeleteObject(_object)
         local objectCustomName = ObjectFunctions.GetObjectCustomName(_object)
         square:transmitRemoveItemFromSquare(_object)
         square:RecalcProperties()
-        functions.Print("Deleted object " .. objectCustomName .. " on square x:" .. tostring(square:getX()) .. " y:" .. tostring(square:getY()))
+        Print("Deleted object " .. objectCustomName .. " on square x:" .. tostring(square:getX()) .. " y:" .. tostring(square:getY()))
     end
 end
 

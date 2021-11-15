@@ -1,5 +1,5 @@
 local settings = require("CLO/Settings")
-local functions = require("CLO/Functions")
+local ObjectFunctions = require("CLO/Functions/Object")
 local DispenserTypes = require("CLO/DispenserTypes")
 
 ---@class DispenserFunctions
@@ -10,7 +10,8 @@ local DispenserFunctions = {}
 ---@return table
 function DispenserFunctions.GetDispenserType(_isoObject)
     if not instanceof(_isoObject, "IsoObject") then return end
-    local customName = functions.Object.GetObjectCustomName(_isoObject)
+
+    local customName = ObjectFunctions.GetObjectCustomName(_isoObject)
     if customName ~= "" then
         local groupName = _isoObject:getProperties():Val("GroupName")
         if customName == DispenserTypes.DefaultDispenser.CustomName and groupName == "Water" then
@@ -56,11 +57,11 @@ function DispenserFunctions.CreateDispenserOnSquare(_square, _dispenserType, _fa
         local dispenser = IsoObject.new(_square, _dispenserType[_facing], _dispenserType.CustomName)
         if _dispenserType ~= DispenserTypes.DefaultDispenser then
             if _dispenserType.type == "water" then
-                functions.Object.SetObjectWaterAmount(dispenser, _amount)
-                functions.Object.SetObjectWaterMax(dispenser, settings.DispenserAmountMax)
+                ObjectFunctions.SetObjectWaterAmount(dispenser, _amount)
+                ObjectFunctions.SetObjectWaterMax(dispenser, settings.DispenserAmountMax)
             elseif _dispenserType.type == "fuel" then
-                functions.Object.SetObjectFuelAmount(dispenser, _amount)
-                functions.Object.SetObjectFuelMax(dispenser, settings.DispenserAmountMax)
+                ObjectFunctions.SetObjectFuelAmount(dispenser, _amount)
+                ObjectFunctions.SetObjectFuelMax(dispenser, settings.DispenserAmountMax)
             end
         end
         _square:AddTileObject(dispenser)
@@ -81,11 +82,11 @@ function DispenserFunctions.RotateDispenserOnSquare(_square, _dispenserType, _fa
     if currentDispenser and currentType then
         local currentAmount = 0
         if currentType == DispenserTypes.DefaultDispenser or currentType.type == "water" then
-            currentAmount = functions.Object.GetObjectWaterAmount(currentDispenser)
+            currentAmount = ObjectFunctions.GetObjectWaterAmount(currentDispenser)
         elseif currentType.type == "fuel" then
-            currentAmount = functions.Object.GetObjectFuelAmount(currentDispenser)
+            currentAmount = ObjectFunctions.GetObjectFuelAmount(currentDispenser)
         end
-        functions.Object.DeleteObject(currentDispenser)
+        ObjectFunctions.DeleteObject(currentDispenser)
         local newDispenser = DispenserFunctions.CreateDispenserOnSquare(_square, _dispenserType, _facing, currentAmount)
         return newDispenser
     end
@@ -103,19 +104,19 @@ function DispenserFunctions.TransformDispenserOnSquare(_square, _dispenserType, 
     local currentDispenser = DispenserFunctions.GetDispenserOnSquare(_square)
     local currentType = DispenserFunctions.GetDispenserType(currentDispenser)
     if currentDispenser and currentType then
-        local facing = functions.Object.GetObjectFacing(currentDispenser)
+        local facing = ObjectFunctions.GetObjectFacing(currentDispenser)
         local currentAmount = 0
         if currentType == DispenserTypes.DefaultDispenser or currentType.type == "water" then
-            currentAmount = functions.Object.GetObjectWaterAmount(currentDispenser)
+            currentAmount = ObjectFunctions.GetObjectWaterAmount(currentDispenser)
         elseif currentType.type == "fuel" then
-            currentAmount = functions.Object.GetObjectFuelAmount(currentDispenser)
+            currentAmount = ObjectFunctions.GetObjectFuelAmount(currentDispenser)
         end
         if _liquidAmount and _liquidAmount > 0 then
             currentAmount = _liquidAmount
         end
-        functions.Object.DeleteObject(currentDispenser)
+        ObjectFunctions.DeleteObject(currentDispenser)
         local newDispenser = DispenserFunctions.CreateDispenserOnSquare(_square, _dispenserType, facing, currentAmount)
-        functions.Object.SetObjectWaterTainted(newDispenser, _tainted)
+        ObjectFunctions.SetObjectWaterTainted(newDispenser, _tainted)
         return newDispenser
     end
 end
