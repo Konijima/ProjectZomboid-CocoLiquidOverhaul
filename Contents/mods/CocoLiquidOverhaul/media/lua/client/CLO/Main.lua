@@ -20,11 +20,9 @@ require("CLO/Contexts/CLO_Context_TakeFuelFromPump")
 
 local function OnLoad()
     print(settings.Name .. " v" .. tostring(settings.Version) .. " has loaded!")
-
     for i = 1, #settings.PreloadLogs do
         print(settings.PreloadLogs[i])
     end
-
     settings.Loaded = true
 end
 
