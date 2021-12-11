@@ -1,17 +1,17 @@
--- require "Items/SuburbsDistributions"
--- require "Items/ProceduralDistributions"
+require "Items/SuburbsDistributions"
+require "Items/ProceduralDistributions"
 
--- --- ProceduralDistributions
+--- ProceduralDistributions
 
--- -- FridgeBottles
--- table.insert(ProceduralDistributions["list"]["FridgeBottles"].items, "CocoLiquidOverhaulItems.Coco_WaterGallonFull")
--- table.insert(ProceduralDistributions["list"]["FridgeBottles"].items, 2)
+-- FridgeBottles
+table.insert(ProceduralDistributions["list"]["FridgeBottles"].items, "CocoLiquidOverhaulItems.Coco_WaterGallonFull")
+table.insert(ProceduralDistributions["list"]["FridgeBottles"].items, 2)
 
--- -- GigamartBottles
--- table.insert(ProceduralDistributions["list"]["GigamartBottles"].items, "CocoLiquidOverhaulItems.Coco_WaterGallonFull")
--- table.insert(ProceduralDistributions["list"]["GigamartBottles"].items, 4)
+-- GigamartBottles
+table.insert(ProceduralDistributions["list"]["GigamartBottles"].items, "CocoLiquidOverhaulItems.Coco_WaterGallonFull")
+table.insert(ProceduralDistributions["list"]["GigamartBottles"].items, 4)
 
--- -- KitchenBottles
--- table.insert(ProceduralDistributions["list"]["KitchenBottles"].items, "CocoLiquidOverhaulItems.Coco_WaterGallonFull")
--- table.insert(ProceduralDistributions["list"]["KitchenBottles"].items, 2)
+-- KitchenBottles
+table.insert(ProceduralDistributions["list"]["KitchenBottles"].items, "CocoLiquidOverhaulItems.Coco_WaterGallonFull")
+table.insert(ProceduralDistributions["list"]["KitchenBottles"].items, 2)
 
