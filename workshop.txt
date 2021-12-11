@@ -1,8 +1,8 @@
 version=1
 id=2539452952
-title=[B41] Coco Liquid Overhaul
+title=[MP] Coco Liquid Overhaul
 description=[h1]Coco Liquid Overhaul[/h1]
-description=Updated for beta 41.56 IWBUMS.
+description=Updated for MP, will need your feedback as I couldn't test with anyone.
 description=
 description=[hr]
 description=
@@ -85,5 +85,5 @@ description=
 description=[hr]
 description=
 description=Github: https://github.com/Konijima/ProjectZomboid-CocoLiquidOverhaul
-tags=Build 41;Items;Realistic
+tags=Build 41;Items;Multiplayer;Realistic
 visibility=public
