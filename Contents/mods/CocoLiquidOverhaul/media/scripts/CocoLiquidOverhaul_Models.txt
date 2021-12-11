@@ -1,27 +1,46 @@
-module CocoLiquidOverhaulModels
+module Base
 {
-    imports
-	{
-		Base,
-	}
-
     model BigWaterBottle
     {
         mesh = BigWaterBottle,
+    }
+    model BigWaterBottleGround
+    {
+        mesh = WorldItems/BigWaterBottle,
+        texture = BigWaterBottle,
+        scale = 0.01,
     }
 
     model BigWaterBottleFuel
     {
         mesh = BigWaterBottleFuel,
     }
+    model BigWaterBottleFuelGround
+    {
+        mesh = WorldItems/BigWaterBottle,
+        texture = BigWaterBottleFuel,
+        scale = 0.01,
+    }
 
     model BigWaterBottleEmpty
     {
         mesh = BigWaterBottleEmpty,
     }
+    model BigWaterBottleEmptyGround
+    {
+        mesh = WorldItems/BigWaterBottle,
+        texture = BigWaterBottleEmpty,
+        scale = 0.01,
+    }
 
     model LargePetrolCan
     {
         mesh = LargePetrolCan,
+    }
+    model LargePetrolCanGround
+    {
+        mesh = WorldItems/LargePetrolCan,
+        texture = LargePetrolCan,
+        scale = 0.01,
     }
 }
