@@ -1,3 +1,0 @@
-IGUI_ES = {
-	IGUI_ItemCat_Coco_Liquid_Container = "Liquid Container",
-}
