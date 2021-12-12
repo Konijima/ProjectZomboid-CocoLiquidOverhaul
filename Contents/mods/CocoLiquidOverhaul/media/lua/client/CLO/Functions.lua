@@ -644,6 +644,7 @@ function CLO_Funcs.CreateDispenserOnSquare(_square, _dispenserType, _facing, _am
             end
         end
         _square:AddTileObject(dispenser)
+        dispenser:transmitCompleteItemToServer() -- Fix network
         return dispenser
     end
 end
