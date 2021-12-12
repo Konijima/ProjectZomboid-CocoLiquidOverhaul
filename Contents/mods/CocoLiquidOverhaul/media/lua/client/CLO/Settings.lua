@@ -5,8 +5,8 @@ local CustomCategories = {
 --- Mod Settings
 CLO_ModSettings = {
     ModID = "CocoLiquidOverhaul",
-    Name = "[B41] Coco Liquid Overhaul",
-    Version = 2.0,
+    Name = "[MP] Coco Liquid Overhaul",
+    Version = "MP-1.1",
     DispenserAmountMax = 100,
     Loaded = false,
     PreloadLogs = {},
