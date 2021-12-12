@@ -79,7 +79,7 @@ function ISTakeGasolineFromVehicle:perform()
         ISTakeGasolineFromVehicle_perform(self)
     else
         self.item:setJobDelta(0)
-        self.item:setUsedDelta(self.itemTarget)
+        --self.item:setUsedDelta(self.itemTarget)
 
         -- needed to remove from queue / start next.
         ISBaseTimedAction.perform(self)
